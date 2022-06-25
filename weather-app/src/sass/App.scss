@@ -1,5 +1,5 @@
 .App {
-	background-image: url(../images/sunset.jpg);
+	background-image: url(../images/night/cloudy.jpg);
 	min-width: 100vw;
 	min-height: 100vh;
 	background-position: center;
@@ -22,6 +22,10 @@
 		height: 100%;
 		background: rgba(0, 0, 0, 0.3);
 		z-index: 0;
+
+        @media screen and (max-width: 800px) {
+            min-height: 40rem;
+        }
 	}
 
 	&__container {
@@ -68,6 +72,7 @@
 
         @media screen and (max-width: 800px) {
             width: 100%;
+            margin: 2rem 0 2rem 0
         }
     }
 
@@ -104,7 +109,8 @@
 	}
 
 	&__icon {
-		font-size: 2.5rem;
+		width: 50px;
+        height: 50px;
 		display: block;
 		margin: 0.25rem 0;
         color: rgb(255, 238, 0);

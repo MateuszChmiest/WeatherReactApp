@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { BsFillSunFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 
 function App() {
 	const [citySelect, setCitySelect] = useState(false);
 	const [cityInput, setCityInput] = useState("");
+  const [timeOfDay, setTimeOfDay] = useState("");
+  console.log(timeOfDay);
 
 
 	const [temp, setTemp] = useState("27");
@@ -14,8 +15,8 @@ function App() {
   const [time, setTime] = useState("00:00");
   const [cloud, setCloud] = useState("20");
   const [humidity, setHumidity] = useState("70");
-  const [wind, setWind] = useState("3")
-  const [iconID, setIconID] = useState("")
+  const [wind, setWind] = useState("3");
+  const [iconID, setIconID] = useState("");
 
 	const cities = ["Berlin", "Warsaw", "New York", "Paris"];
 
@@ -56,7 +57,24 @@ function App() {
 
         setCloud(data.current.cloud);
         setHumidity(data.current.humidity);
-        setWind(data.current.wind_kph);
+        setWind(data.current.wind_kph );
+
+        const code = data.current.condition.code;
+        const App = document.querySelector('.App');
+        const Btn = document.querySelector('.App__btn');
+
+        data.current.is_day === 0 ? setTimeOfDay('night') : setTimeOfDay('day');
+
+        if(code === 1000) {
+          App.style.backgroundImage = `url(.images/${timeOfDay}/clear.jpg`;
+          Btn.style.background = "#e5ba92";
+
+          if(timeOfDay === "night") {
+            Btn.style.background = "#181e27";
+          }
+        }
+
+        
 			});
 	};
 
@@ -87,13 +105,105 @@ function App() {
         setCloud(data.current.cloud);
         setHumidity(data.current.humidity);
         setWind(data.current.wind_kph);
+
+        const code = data.current.condition.code;
+        const App = document.querySelector('.App');
+        const Btn = document.querySelector('.App__btn');
+
+        data.current.is_day === 0 ? setTimeOfDay('night') : setTimeOfDay('day');
+
+        if(code === 1000) {
+          App.style.backgroundImage = `url(.images/${timeOfDay}/clear.jpg`;
+          Btn.style.background = "#e5ba92";
+
+          if(timeOfDay === "night") {
+            Btn.style.background = "#181e27";
+          }
+        }
+        // else if (
+        //   code === 1003 ||
+        //   code === 1006 ||
+        //   code === 1009 ||
+        //   code === 1030 ||
+        //   code === 1069 ||
+        //   code === 1087 ||
+        //   code === 1135 ||
+        //   code === 1273 ||
+        //   code === 1276 ||
+        //   code === 1279 ||
+        //   code === 1282 &
+        //   timeOfDay === "day"
+        // ) {
+        //   App.style.backgroundImage = `url(${cloudyDay})`;
+        // }
+        // else if (
+        //   code === 1003 ||
+        //   code === 1006 ||
+        //   code === 1009 ||
+        //   code === 1030 ||
+        //   code === 1069 ||
+        //   code === 1087 ||
+        //   code === 1135 ||
+        //   code === 1273 ||
+        //   code === 1276 ||
+        //   code === 1279 ||
+        //   code === 1282 &
+        //   timeOfDay === "night"
+        // ) {
+        //   App.style.backgroundImage = `url(${cloudyNight})`;
+        // }
+        // else if (
+        //   code === 1063 ||
+        //   code === 1069 ||
+        //   code === 1072 ||
+        //   code === 1150 ||
+        //   code === 1180 ||
+        //   code === 1183 ||
+        //   code === 1186 ||
+        //   code === 1189 ||
+        //   code === 1192 ||
+        //   code === 1195 ||
+        //   code === 1204 ||
+        //   code === 1207 ||
+        //   code === 1240 ||
+        //   code === 1243 ||
+        //   code === 1246 ||
+        //   code === 1249 ||
+        //   code === 1252  &
+        //   timeOfDay === "day"
+        // ) {
+        //   App.style.backgroundImage = `url(${rainyDay})`;
+        // }
+        // else if (
+        //   code === 1063 ||
+        //   code === 1069 ||
+        //   code === 1072 ||
+        //   code === 1150 ||
+        //   code === 1180 ||
+        //   code === 1183 ||
+        //   code === 1186 ||
+        //   code === 1189 ||
+        //   code === 1192 ||
+        //   code === 1195 ||
+        //   code === 1204 ||
+        //   code === 1207 ||
+        //   code === 1240 ||
+        //   code === 1243 ||
+        //   code === 1246 ||
+        //   code === 1249 ||
+        //   code === 1252  &
+        //   timeOfDay === "night"
+        // ) {
+        //   App.style.backgroundImage = `url(${rainyNight})`;
+        // }
+      
 			});
 	};
 
 	return (
 		<section
 			className='App'
-			style={citySelect ? { opacity: 0 } : { opacity: 1 }}>
+			style={citySelect ? {opacity: 0} : {opacity: 1}}>
 			<div className='App__container'>
 				<h3 className='App__brand'>The Weather</h3>
 				<div className='App__parameters'>
