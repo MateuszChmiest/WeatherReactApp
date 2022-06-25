@@ -1,18 +1,19 @@
 import React from "react";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { BsFillSunFill } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa"
 
 function App() {
 	return (
 		<section className='App'>
 			<div className='App__container'>
 				<h3 className='App__brand'>The Weather</h3>
-				<div>
+				<div className="App__parameters">
 					<h1 className='App__temp'>16&#176;</h1>
 					<div className='App__citytime'>
 						<h1 className='App__name'>London</h1>
 						<small>
-							<span className='App__time'>06:09</span>-
-							<span className='App__date'>Monday Sep 19</span>
+							<span className='App__time'>06:09 -</span>
+							 <span className='App__date'> Monday, Sep 19</span>
 						</small>
 					</div>
 					<div className='App__weather'>
@@ -27,7 +28,7 @@ function App() {
       <div className="App__panel">
         <form id="locationInput">
           <input type="text" className="App__search" placeholder="Search Location..."/>
-          <button type="submit" className="App__btn"><BsSearch/></button>
+          <button type="submit" className="App__btn"><FaSearch/></button>
         </form>
         <ul className="App__cities">
           <li className="App__city">New York</li>
