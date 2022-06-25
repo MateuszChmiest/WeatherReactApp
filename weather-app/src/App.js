@@ -6,11 +6,15 @@ function App() {
 	const [citySelect, setCitySelect] = useState(false);
 	const [cityInput, setCityInput] = useState("");
 
+
 	const [temp, setTemp] = useState("27");
   const [condition, setCondition] = useState("Sunny");
   const [cityName, setCityName] = useState("Warsaw");
   const [date, setDate] = useState("12,02,2022");
   const [time, setTime] = useState("00:00");
+  const [cloud, setCloud] = useState("20");
+  const [humidity, setHumidity] = useState("70");
+  const [wind, setWind] = useState("3")
   const [iconID, setIconID] = useState("")
 
 	const cities = ["Berlin", "Warsaw", "New York", "Paris"];
@@ -47,8 +51,42 @@ function App() {
         setDate(`${d}, ${m}, ${y}`);
         setTime(time);
 
-        const iconID = data.current.condition.icon.substr("//cdn.weatherapi.com/weather/64x64/".length);
-        setIconID(`/weather/${iconID}`)
+        const iconID = data.current.condition.icon;
+        setIconID(iconID);
+
+        setCloud(data.current.cloud);
+        setHumidity(data.current.humidity);
+        setWind(data.current.wind_kph);
+			});
+	};
+
+  const popularCityWeatherData = (popularCity) => {
+		fetch(
+			`http://api.weatherapi.com/v1/current.json?key=59b81ff816324b048da132739222506&q=${popularCity}`
+		)
+			.then((resp) => resp.json())
+			.then((data) => {
+				console.log(data);
+
+				setTemp(data.current.temp_c);
+        setCondition(data.current.condition.text);
+        setCityName(data.location.name);
+
+        const date = data.location.localtime;
+        const y = parseInt(date.substr(0,4));
+        const m = parseInt(date.substr(5,2));
+        const d = parseInt(date.substr(8,2));
+        const time = date.substr(11);
+
+        setDate(`${d}, ${m}, ${y}`);
+        setTime(time);
+
+        const iconID = data.current.condition.icon
+        setIconID(iconID)
+
+        setCloud(data.current.cloud);
+        setHumidity(data.current.humidity);
+        setWind(data.current.wind_kph);
 			});
 	};
 
@@ -96,8 +134,7 @@ function App() {
 							className='App__city'
 							key={index}
 							onClick={(e) => {
-                setCityInput(e.target.innerHTML);
-                fetchWeatherData();
+                popularCityWeatherData(e.target.innerHTML)
               }			
 							}>
 							{city}
@@ -108,15 +145,15 @@ function App() {
 					<h4>Weather Details</h4>
 					<li>
 						<span>Cloudy</span>
-						<span className='App__cloud'>89%</span>
+						<span className='App__cloud'>{cloud}%</span>
 					</li>
 					<li>
 						<span>Humidity</span>
-						<span className='App__humidity'>64%</span>
+						<span className='App__humidity'>{humidity}%</span>
 					</li>
 					<li>
 						<span>Wind</span>
-						<span className='App__wind'>8km/h</span>
+						<span className='App__wind'>{wind}km/h</span>
 					</li>
 				</ul>
 			</div>
