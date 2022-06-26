@@ -232,9 +232,11 @@
 		}
 	}
 
-    &__cloud, &__wind, &__humidity {
-        font-weight: bold;
-    }
+	&__cloud,
+	&__wind,
+	&__humidity {
+		font-weight: bold;
+	}
 }
 
 @media screen and (max-width: 800px) {
