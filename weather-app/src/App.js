@@ -34,7 +34,7 @@ function App() {
 
 	const fetchWeatherData = () => {
 		fetch(
-			`http://api.weatherapi.com/v1/current.json?key=59b81ff816324b048da132739222506&q=${cityInput}`
+			`https://api.weatherapi.com/v1/current.json?key=59b81ff816324b048da132739222506&q=${cityInput}`
 		)
 			.then((resp) => resp.json())
 			.then((data) => {
@@ -120,7 +120,7 @@ function App() {
 
 	const popularCityWeather = (popularCity) => {
 		fetch(
-			`http://api.weatherapi.com/v1/current.json?key=59b81ff816324b048da132739222506&q=${popularCity}`
+			`https://api.weatherapi.com/v1/current.json?key=59b81ff816324b048da132739222506&q=${popularCity}`
 		)
 			.then((resp) => resp.json())
 			.then((data) => {
