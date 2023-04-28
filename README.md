@@ -23,3 +23,8 @@ The React Weather App is simple aplication using API with modern responsive desi
 ## Hosting
 The projest is hosted on vercel platform, so you can see this project without downloading it.
 You can see this project <a href="https://the-weather-react-app.vercel.app/">> HERE <</a>
+
+<h2>Run</h2>
+<li>go to the weather-app folder</li>
+<li>npm install</li>
+<li>npm start</li>
